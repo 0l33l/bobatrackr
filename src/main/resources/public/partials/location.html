@@ -1,0 +1,17 @@
+<div style="float: right">
+	<a href="#!/location/create" class="btn btn-default" ng-show="hasRole('ROLE_ADMIN')">Create</a>
+</div>
+<div class="page-header">
+	<h3>Locations</h3>
+</div>
+
+<div ng-repeat="locationEntry in locationEntries">
+	<hr />
+	<div class="pull-right">
+		<a ng-click="deleteEntry(locationEntry)" class="btn btn-xs btn-default" ng-show="hasRole('ROLE_ADMIN')">Remove</a>
+		<a href="#!/edit/{{locationEntry.id}}" class="btn btn-xs btn-default" ng-show="hasRole('ROLE_ADMIN')">Edit</a>
+	</div>
+	<h4>{{locationEntry.date | date}}</h4>
+	<p>{{locationEntry.title}}</p>
+</div>
+<hr />
