@@ -1,5 +1,6 @@
 package org.bobatrackr;
 
+import org.bobatrackr.domain.NewsEntry;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
@@ -48,33 +49,4 @@ class NewsController {
         for (long i = 0; i < 5; i++)
             this.entries.put(i, new NewsEntry(i, "Title #" + i));
     }
-
-    public static class NewsEntry {
-        private long id;
-        private String content;
-
-        public NewsEntry() {}
-
-        public NewsEntry(long id, String b) {
-            this.id = id;
-            this.content = b;
-        }
-
-        public long getId() {
-            return this.id;
-        }
-
-        public String getContent() {
-            return this.content;
-        }
-
-        public void setId(long id) {
-            this.id = id;
-        }
-
-        public void setContent(String content) {
-            this.content = content;
-        }
-    }
-
 }
