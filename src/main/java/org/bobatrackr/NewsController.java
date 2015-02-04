@@ -43,15 +43,7 @@ class NewsController {
 
     @RequestMapping(value = "/news", method = RequestMethod.POST)
     NewsEntry add(@RequestBody NewsEntry news) {
-//        long id = 10 + new Random().nextInt(99);
-//        news.setId(id);
-//        this.entries.put(id, news);
         newsRepository.save(news);
         return news;
-    }
-
-    NewsController() {
-//        for (long i = 0; i < 5; i++)
-//        newsRepository.save(new NewsEntry(i, "Title #" + i));
     }
 }
