@@ -15,6 +15,11 @@ angular.module('exampleApp', ['ngRoute', 'ngCookies', 'exampleApp.services'])
 				controller: NewsEditController
 			});
 
+            $routeProvider.when('/location/edit/:id', {
+                templateUrl: 'partials/editLocation.html',
+                controller: LocationEditController
+            });
+
 			$routeProvider.when('/login', {
 				templateUrl: 'partials/login.html',
 				controller: LoginController
@@ -140,6 +145,17 @@ function NewsEditController($scope, $routeParams, $location, NewsService) {
 	};
 }
 
+
+function LocationEditController($scope, $routeParams, $location, LocationService) {
+
+    $scope.locationEntry = LocationService.get({id: $routeParams.id});
+
+    $scope.save = function() {
+        $scope.locationEntry.$save(function() {
+            $location.path('/location');
+        });
+    };
+}
 
 function CreateController($scope, $location, NewsService) {
 
