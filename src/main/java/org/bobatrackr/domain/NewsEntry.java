@@ -2,6 +2,7 @@ package org.bobatrackr.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -12,6 +13,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "news")
 public class NewsEntry {
     @Id
+    @GeneratedValue
     private long id;
 
     @Column

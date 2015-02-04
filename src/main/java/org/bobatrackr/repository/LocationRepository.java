@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
  * Created by dburban on 2/3/15.
  */
 @Repository
-public interface LocationRepository extends CrudRepository<LocationEntry, Integer> {
+public interface LocationRepository extends CrudRepository<LocationEntry, Long> {
 }

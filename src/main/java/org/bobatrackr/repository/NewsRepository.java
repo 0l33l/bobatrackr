@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
  * Created by dburban on 2/3/15.
  */
 @Repository
-public interface NewsRepository extends CrudRepository<NewsEntry, Integer> {
+public interface NewsRepository extends CrudRepository<NewsEntry, Long> {
 }
