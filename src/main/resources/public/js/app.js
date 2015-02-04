@@ -7,7 +7,12 @@ angular.module('exampleApp', ['ngRoute', 'ngCookies', 'exampleApp.services'])
 
 			$routeProvider.when('/create', {
 				templateUrl: 'partials/create.html',
-				controller: CreateController
+				controller: NewsCreateController
+			});
+
+			$routeProvider.when('/location/create', {
+				templateUrl: 'partials/createLocation.html',
+				controller: LocationCreateController
 			});
 
 			$routeProvider.when('/edit/:id', {
@@ -157,7 +162,7 @@ function LocationEditController($scope, $routeParams, $location, LocationService
     };
 }
 
-function CreateController($scope, $location, NewsService) {
+function NewsCreateController($scope, $location, NewsService) {
 
 	$scope.newsEntry = new NewsService();
 
@@ -166,6 +171,17 @@ function CreateController($scope, $location, NewsService) {
 			$location.path('/');
 		});
 	};
+}
+
+function LocationCreateController($scope, $location, LocationService) {
+
+    $scope.locationEntry = new LocationService();
+
+    $scope.save = function() {
+        $scope.locationEntry.$save(function() {
+            $location.path('/location');
+        });
+    };
 }
 
 
