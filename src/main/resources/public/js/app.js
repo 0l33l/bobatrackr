@@ -1,27 +1,27 @@
 
 var xAuthTokenHeaderName = 'x-auth-token';
 
-angular.module('exampleApp', ['ngRoute', 'ngCookies', 'exampleApp.services'])
+angular.module('bobaApp', ['ngRoute', 'ngCookies', 'bobaApp.services'])
 	.config(
 		[ '$routeProvider', '$locationProvider', '$httpProvider', function($routeProvider, $locationProvider, $httpProvider) {
 
-			$routeProvider.when('/create', {
-				templateUrl: 'partials/create.html',
+			$routeProvider.when('/news/create', {
+				templateUrl: 'partials/news/create.html',
 				controller: NewsCreateController
 			});
 
 			$routeProvider.when('/location/create', {
-				templateUrl: 'partials/createLocation.html',
+				templateUrl: 'partials/location/create.html',
 				controller: LocationCreateController
 			});
 
 			$routeProvider.when('/edit/:id', {
-				templateUrl: 'partials/edit.html',
+				templateUrl: 'partials/news/edit.html',
 				controller: NewsEditController
 			});
 
             $routeProvider.when('/location/edit/:id', {
-                templateUrl: 'partials/editLocation.html',
+                templateUrl: 'partials/location/edit.html',
                 controller: LocationEditController
             });
 
@@ -31,8 +31,13 @@ angular.module('exampleApp', ['ngRoute', 'ngCookies', 'exampleApp.services'])
 			});
 
             $routeProvider.when('/location', {
-				templateUrl: 'partials/location.html',
+				templateUrl: 'partials/location/location.html',
 				controller: LocationController
+			});
+
+            $routeProvider.when('/news', {
+				templateUrl: 'partials/news/news.html',
+				controller: NewsController
 			});
 
 			$routeProvider.otherwise({
@@ -127,6 +132,17 @@ function IndexController($scope, NewsService) {
 	};
 }
 
+function NewsController($scope, NewsService) {
+
+	$scope.newsEntries = NewsService.query();
+
+	$scope.deleteEntry = function(newsEntry) {
+		newsEntry.$remove(function() {
+			$scope.newsEntries = NewsService.query();
+		});
+	};
+}
+
 function LocationController($scope, LocationService) {
 
 	$scope.locationEntries = LocationService.query();
@@ -168,7 +184,7 @@ function NewsCreateController($scope, $location, NewsService) {
 
 	$scope.save = function() {
 		$scope.newsEntry.$save(function() {
-			$location.path('/');
+			$location.path('/news');
 		});
 	};
 }
@@ -198,7 +214,7 @@ function LoginController($scope, $rootScope, $location, $http, $cookieStore, Log
 }
 
 
-var services = angular.module('exampleApp.services', ['ngResource']);
+var services = angular.module('bobaApp.services', ['ngResource']);
 
 services.factory('LoginService', function($resource) {
 
