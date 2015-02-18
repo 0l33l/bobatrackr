@@ -74,7 +74,7 @@ angular.module('bobaApp', ['ngRoute', 'ngCookies', 'bobaApp.services'])
 		            return promise.then(success, error);
 		        };
 		    };
-		    $httpProvider.responseInterceptors.push(interceptor);
+		    $httpProvider.interceptors.push(interceptor);
 
 		} ]
 
