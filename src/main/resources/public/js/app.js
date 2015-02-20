@@ -3,7 +3,7 @@ var xAuthTokenHeaderName = 'x-auth-token';
 
 angular.module('bobaApp', ['ngRoute', 'ngCookies', 'bobaApp.services'])
 	.config(
-		[ '$routeProvider', '$locationProvider', '$httpProvider', function($routeProvider, $locationProvider, $httpProvider) {
+		[ '$routeProvider', '$locationProvider', '$httpProvider', '$provide', function($routeProvider, $locationProvider, $httpProvider, $provide) {
 
 			$routeProvider.when('/news/create', {
 				templateUrl: 'partials/news/create.html',
@@ -47,36 +47,55 @@ angular.module('bobaApp', ['ngRoute', 'ngCookies', 'bobaApp.services'])
 
 			$locationProvider.hashPrefix('!');
 
-			/* Intercept http errors */
-			var interceptor = function ($rootScope, $q, $location) {
+            // Intercept http calls.
+            $provide.factory('MyHttpInterceptor', function ($q, $location) {
+                return {
+                    // On request success
+                    request: function (config) {
+                        // console.log(config); // Contains the data about the request before it is sent.
 
-		        function success(response) {
-		            return response;
-		        }
+                        // Return the config or wrap it in a promise if blank.
+                        return config || $q.when(config);
+                    },
 
-		        function error(response) {
+                    // On request failure
+                    requestError: function (rejection) {
+                        // console.log(rejection); // Contains the data about the error on the request.
 
-		            var status = response.status;
-		            var config = response.config;
-		            var method = config.method;
-		            var url = config.url;
+                        // Return the promise rejection.
+                        return $q.reject(rejection);
+                    },
 
-		            if (status == 401) {
-		            	$location.path( "/login" );
-		            } else {
-		            	$rootScope.error = method + " on " + url + " failed with status " + status;
-		            }
+                    // On response success
+                    response: function (response) {
+                        // console.log(response); // Contains the data from the response.
 
-		            return $q.reject(response);
-		        }
+                        // Return the response or promise.
+                        return response || $q.when(response);
+                    },
 
-		        return function (promise) {
-		            return promise.then(success, error);
-		        };
-		    };
-		    $httpProvider.interceptors.push(interceptor);
+                    // On response failure
+                    responseError: function error(response) {
+                            var status = response.status;
+                            var config = response.config;
+                            var method = config.method;
+                            var url = config.url;
 
-		} ]
+                            if (status == 401) {
+                               $location.path("/login");
+                           } else if (status == 403) {
+                               $location.path("/login");
+                            } else {
+                            	$rootScope.error = method + " on " + url + " failed with status " + status;
+                            }
+
+                            return $q.reject(response);
+                        }
+                };
+            });
+            $httpProvider.interceptors.push('MyHttpInterceptor');
+
+        } ]
 
 	).run(function($rootScope, $http, $location, $cookieStore, LoginService) {
 
