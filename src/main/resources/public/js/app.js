@@ -2,7 +2,7 @@
 
 var xAuthTokenHeaderName = 'x-auth-token';
 
-angular.module('bobaApp', ['ngRoute', 'ngCookies', 'bobaApp.services'])
+var app = angular.module('bobaApp', ['ngRoute', 'ngCookies', 'bobaApp.services'])
 	.config(
 		[ '$routeProvider', '$locationProvider', '$httpProvider', '$provide', function($routeProvider, $locationProvider, $httpProvider, $provide) {
 
