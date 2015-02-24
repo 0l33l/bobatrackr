@@ -16,7 +16,7 @@ var app = angular.module('bobaApp', ['ngRoute', 'ngCookies', 'bobaApp.services']
 				controller: LocationCreateController
 			});
 
-			$routeProvider.when('/edit/:id', {
+			$routeProvider.when('/news/edit/:id', {
 				templateUrl: 'partials/news/edit.html',
 				controller: NewsEditController
 			});

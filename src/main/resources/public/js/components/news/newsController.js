@@ -16,7 +16,7 @@ function NewsEditController($scope, $routeParams, $location, NewsService) {
 
     $scope.save = function() {
         $scope.newsEntry.$save(function() {
-            $location.path('/');
+            $location.path('/news');
         });
     };
 }

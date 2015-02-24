@@ -9,7 +9,7 @@
 	<hr />
 	<div class="pull-right">
 		<a ng-click="deleteEntry(newsEntry)" class="btn btn-xs btn-default" ng-show="hasRole('ROLE_ADMIN')">Remove</a>
-		<a href="#!/edit/{{newsEntry.id}}" class="btn btn-xs btn-default" ng-show="hasRole('ROLE_ADMIN')">Edit</a>
+		<a href="#!/news/edit/{{newsEntry.id}}" class="btn btn-xs btn-default" ng-show="hasRole('ROLE_ADMIN')">Edit</a>
 	</div>
 	<h4>{{newsEntry.date | date}}</h4>
 	<p>{{newsEntry.content}}</p>
