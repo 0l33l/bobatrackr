@@ -1,9 +1,6 @@
 package org.bobatrackr.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -16,6 +13,10 @@ public class ReviewEntry {
     @Id
     @GeneratedValue
     private long id;
+
+    @ManyToOne
+//    @NotNull
+    private LocationEntry locationEntry;
 
     @Column
     @NotNull
@@ -46,5 +47,13 @@ public class ReviewEntry {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public LocationEntry getLocationEntry() {
+        return locationEntry;
+    }
+
+    public void setLocationEntry(LocationEntry locationEntry) {
+        this.locationEntry = locationEntry;
     }
 }

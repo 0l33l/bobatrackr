@@ -10,6 +10,7 @@
 	<div class="pull-right">
 		<a ng-click="deleteEntry(locationEntry)" class="btn btn-xs btn-default" ng-show="hasRole('ROLE_ADMIN')">Remove</a>
 		<a href="#!/location/edit/{{locationEntry.id}}" class="btn btn-xs btn-default" ng-show="hasRole('ROLE_ADMIN')">Edit</a>
+		<a href="#!/review/create/{{locationEntry.id}}" class="btn btn-xs btn-default" ng-show="hasRole('ROLE_ADMIN')">Add Review</a>
 	</div>
 	<h4>{{locationEntry.date | date}}</h4>
 	<p>{{locationEntry.name}}</p>
