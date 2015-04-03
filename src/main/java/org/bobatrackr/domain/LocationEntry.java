@@ -17,7 +17,7 @@ public class LocationEntry {
     private long id;
 
     @Column
-    private String title;
+    private String name;
 
     @Column
     private String address;
@@ -27,7 +27,7 @@ public class LocationEntry {
 
     public LocationEntry(long id, String b, String c) {
         this.id = id;
-        this.title = b;
+        this.name = b;
         this.address = c;
     }
 
@@ -35,16 +35,16 @@ public class LocationEntry {
         return this.id;
     }
 
-    public String getTitle() {
-        return this.title;
+    public String getName() {
+        return this.name;
     }
 
     public void setId(long id) {
         this.id = id;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getAddress() {
